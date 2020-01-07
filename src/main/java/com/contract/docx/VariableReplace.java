@@ -1,6 +1,7 @@
 package com.contract.docx;
 
 import org.docx4j.Docx4J;
+import org.docx4j.Docx4jProperties;
 import org.docx4j.XmlUtils;
 import org.docx4j.jaxb.Context;
 import org.docx4j.model.datastorage.migration.VariablePrepare;
@@ -13,28 +14,29 @@ import java.util.HashMap;
 import java.util.StringTokenizer;
 
 public class VariableReplace {
+
     public static void main(String[] args) throws Exception {
 
         // Exclude context init from timing
-        ObjectFactory foo = Context.getWmlObjectFactory();
+       Context.getWmlObjectFactory();
 
         // Input docx has variables in it: ${colour}, ${icecream}
-        String inputfilepath = "D:/demo.docx";
+        String inputFilePath = "data/data.docx";
 
         boolean save = true;
-        String outputfilepath = "D:/demo_out.docx";
+        String outputFilePath = "data/data_out.docx";
 
         WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage
-                .load(new java.io.File(inputfilepath));
+                .load(new File(inputFilePath));
 
         VariablePrepare.prepare(wordMLPackage);
 
         MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
 
         HashMap<String, String> mappings = new HashMap<>();
-        mappings.put("colour", "aaaaaa");
-        mappings.put("colour1", "Số bảo hành");
-//        mappings.put("icecream", newlineToBreakHack("chocolate\nor strawberry"));
+        mappings.put("MAHD", "01");
+        mappings.put("TENCDT", "BỆNH VIỆN ĐA KHOA KHU VỰC QUẢNG NGÃI");
+        mappings.put("NOIDUNG", "Mua sắm và lắp đặt máy CT Scanner 32 lát cắt và các phụ kiện, thuộc dự án: Bệnh viện Đa khoa Khu vực Quảng Ngãi");
 
         long start = System.currentTimeMillis();
 
@@ -46,7 +48,7 @@ public class VariableReplace {
 
         // Save it
         if (save) {
-            Docx4J.save(wordMLPackage, new File(outputfilepath));
+            Docx4J.save(wordMLPackage, new File(outputFilePath));
         } else {
             System.out.println(XmlUtils.marshaltoString(documentPart.getJaxbElement(), true,
                     true));
