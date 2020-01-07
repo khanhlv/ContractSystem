@@ -13,9 +13,10 @@ public class HomeController {
 
     @GetMapping({"/", "/login"})
     @AllowAnonymous
-    public String home(HomeForm homeForm,
-                       Model model) {
+    public String home(HomeForm homeForm, Model model) {
+
         model.addAttribute("form",homeForm);
+
         return "home/index";
     }
 }
