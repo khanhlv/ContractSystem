@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DashboardController extends AbstractController {
 
-    @GetMapping("/dashboard")
+    @GetMapping("/")
     public String index(Model model) {
-
         return "dashboard/index";
     }
 }

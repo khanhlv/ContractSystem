@@ -5,24 +5,14 @@
     <title>App Fragments</title>
 </head>
 <body>
-
-    <!-- Default Navigator -->
-
-    <ul th:fragment = "nav-default">
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/products}">Products</a></li>
-        <li><a th:href="@{/about}">About</a></li>
-    </ul>
-
-    <!-- Admin Navigator -->
-
-    <ul th:fragment = "nav-admin">
-        <li><a th:href="@{/admin/products}">Product Management</a></li>
-        <li><a th:href="@{/admin/orders}">Order Management</a></li>
-    </ul>
-
-    <div th:fragment="copyright">
-        &copy; o7planning.org
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader" th:fragment="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Đang tải dữ liệu...</p>
+        </div>
     </div>
 
 </body>
