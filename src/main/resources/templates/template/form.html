@@ -7,7 +7,7 @@
                                                 ~{:: #main-content}
                                                )}">
 <head>
-    <title>Thêm mới danh mục</title>
+    <title>Thêm mới mẫu hợp đồng</title>
     <th:block id="style-resources"></th:block>
 </head>
 <body>
@@ -17,12 +17,12 @@
         <!-- ============================================================== -->
         <div class="row page-titles">
             <div class="col-md-5 align-self-center">
-                <h3 class="text-themecolor">Thêm mới danh mục</h3>
+                <h3 class="text-themecolor">Thêm mới mẫu hợp đồng</h3>
             </div>
             <div class="col-md-7 align-self-center">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Trang chủ</a></li>
-                    <li class="breadcrumb-item"><a href="/category/list">Danh mục</a></li>
+                    <li class="breadcrumb-item"><a href="/template/list">Mẫu hợp đồng</a></li>
                     <li class="breadcrumb-item active">Thêm mới</li>
                 </ol>
             </div>
@@ -34,16 +34,51 @@
             <div class="col-lg-12 ">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Thông tin danh mục</h4>
+                        <h4 class="card-title">Thông tin mẫu hợp đồng</h4>
                         <form>
                             <div class="form-group">
-                                <label>Tên danh mục</label>
+                                <label>Tên mẫu hợp đồng</label>
                                 <input type="text" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Danh mục</label>
+                                <select class="form-control">
+                                    <option>Đầu thầu</option>
+                                </select>
                             </div>
 
                             <div class="form-group">
                                 <label>Mô tả danh mục</label>
                                 <textarea rows="5" class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group custom-file">
+                                <input type="file" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label form-control" for="customFile">Chọn mẫu</label>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="table-responsive">
+                                    <table class="table color-bordered-table muted-bordered-table">
+                                        <thead>
+                                            <tr>
+                                                <th width="10px">STT</th>
+                                                <th>Tên File mẫu</th>
+                                                <th width="120px">Ngày tạo</th>
+                                                <th width="120px" class="text-center">Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Hợp đồng 2019.docx</td>
+                                                <td>14/01/2020</td>
+                                                <td class="text-center"><a href="/template/delete/1">Xóa</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
                             <div class="form-group">

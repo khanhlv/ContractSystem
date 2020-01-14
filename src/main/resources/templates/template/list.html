@@ -17,66 +17,91 @@
         <!-- ============================================================== -->
         <div class="row page-titles">
             <div class="col-md-5 align-self-center">
-                <h3 class="text-themecolor">Danh mục hợp đồng</h3>
+                <h3 class="text-themecolor">Danh sách mẫu hợp đồng</h3>
             </div>
             <div class="col-md-7 align-self-center">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Trang chủ</a></li>
-                    <li class="breadcrumb-item active">Danh mục hợp đồng</li>
+                    <li class="breadcrumb-item active">Danh sách mẫu hợp đồng</li>
                 </ol>
             </div>
         </div>
         <!-- ============================================================== -->
         <!-- End Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Stats box -->
-        <!-- ============================================================== -->
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-12 ">
                 <div class="card">
                     <div class="card-body">
-                        <div class="d-flex no-block">
-                            <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="/assets/images/icon/income.png" alt="Income" /></div>
-                            <div class="align-self-center">
-                                <h6 class="text-muted m-t-10 m-b-0">Total Income</h6>
-                                <h2 class="m-t-0">953,000</h2></div>
-                        </div>
+                        <h4 class="card-title">Tìm kiếm mẫu hợp đồng</h4>
+                        <form class="form-material">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Tên mẫu hợp đồng</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Danh mục</label>
+                                        <select class="form-control">
+                                            <option>Tất cả</option>
+                                            <option>Đầu thầu</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Tình trạng</label>
+                                        <select class="form-control">
+                                            <option>Tất cả</option>
+                                            <option>Hoạt động</option>
+                                            <option>Không hoạt động</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-info btn-rounded m-t-10">Tìm kiếm</button>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="d-flex no-block">
-                            <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="/assets/images/icon/expense.png" alt="Income" /></div>
-                            <div class="align-self-center">
-                                <h6 class="text-muted m-t-10 m-b-0">Total Expense</h6>
-                                <h2 class="m-t-0">236,000</h2></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex no-block">
-                            <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="/assets/images/icon/assets.png" alt="Income" /></div>
-                            <div class="align-self-center">
-                                <h6 class="text-muted m-t-10 m-b-0">Total Assets</h6>
-                                <h2 class="m-t-0">987,563</h2></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex no-block">
-                            <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="/assets/images/icon/staff.png" alt="Income" /></div>
-                            <div class="align-self-center">
-                                <h6 class="text-muted m-t-10 m-b-0">Total Staff</h6>
-                                <h2 class="m-t-0">987,563</h2></div>
+                        <h4 class="card-title">Danh sách mẫu hợp đồng</h4>
+                        <a href="/template/add"><button type="button" class="btn btn-info btn-rounded m-t-10 float-right">Thêm mới</button></a>
+                        <div class="table-responsive">
+                            <table class="table color-bordered-table muted-bordered-table m-t-30">
+                                <thead>
+                                <tr>
+                                    <th width="10px">STT</th>
+                                    <th>Tên mẫu hợp đồng</th>
+                                    <th>Danh mục</th>
+                                    <th>Số lượng File</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Tình trạng</th>
+                                    <th width="120px" class="text-center">Hành động</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Hợp đồng 2019</td>
+                                    <td>Đấu thầu</td>
+                                    <td>6</td>
+                                    <td>14/01/2020</td>
+                                    <td>Hoạt động</td>
+                                    <td class="text-center">
+                                        <a href="/template/edit/1">Sửa</a> | <a href="/template/delete/1">Xóa</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
