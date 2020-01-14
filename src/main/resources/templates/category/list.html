@@ -7,7 +7,7 @@
                                                 ~{:: #main-content}
                                                )}">
 <head>
-    <title>Danh mục hợp đồng</title>
+    <title>Danh mục</title>
     <th:block id="style-resources"></th:block>
 </head>
 <body>
@@ -17,53 +17,76 @@
         <!-- ============================================================== -->
         <div class="row page-titles">
             <div class="col-md-5 align-self-center">
-                <h3 class="text-themecolor">Danh mục hợp đồng</h3>
+                <h3 class="text-themecolor">Danh mục</h3>
             </div>
             <div class="col-md-7 align-self-center">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Trang chủ</a></li>
-                    <li class="breadcrumb-item active">Danh mục hợp đồng</li>
+                    <li class="breadcrumb-item active">Danh mục</li>
                 </ol>
             </div>
         </div>
         <!-- ============================================================== -->
         <!-- End Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
-
+        <div class="row">
+            <div class="col-lg-12 ">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Tìm kiếm danh mục</h4>
+                        <form class="form-material">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tên</label>
+                                        <input type="text" class="form-control" placeholder="Tên danh mục">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tình trạng</label>
+                                        <select class="form-control">
+                                            <option>Hoạt động</option>
+                                            <option>Không hoạt động</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <button type="button" class="btn btn-info btn-rounded m-t-10">Tìm kiếm</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Danh sách hợp đồng</h4>
+                        <h4 class="card-title">Danh sách danh mục</h4>
+                        <a href="/category/add"><button type="button" class="btn btn-info btn-rounded m-t-10 float-right">Thêm mới</button></a>
                         <div class="table-responsive">
-                            <table class="table color-table inverse-table">
+                            <table class="table color-bordered-table muted-bordered-table m-t-30">
                                 <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
-                                </tr>
+                                    <tr>
+                                        <th width="10px">STT</th>
+                                        <th>Tên danh mục</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Tình trạng</th>
+                                        <th width="120px" class="text-center">Hành động</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Nigam</td>
-                                    <td>Eichmann</td>
-                                    <td>@Sonu</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Deshmukh</td>
-                                    <td>Prohaska</td>
-                                    <td>@Genelia</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Roshan</td>
-                                    <td>Rogahn</td>
-                                    <td>@Hritik</td>
-                                </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Đầu thầu</td>
+                                        <td>14/01/2020</td>
+                                        <td>Hoạt động</td>
+                                        <td class="text-center">
+                                            <a href="/category/edit/1">Sửa</a> | <a href="/category/delete/1">Xóa</a>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
