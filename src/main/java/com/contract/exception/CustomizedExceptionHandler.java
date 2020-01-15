@@ -17,6 +17,14 @@ public class CustomizedExceptionHandler {
         return "error/500";
     }
 
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public String handleAccessDenied(Model model, AccessDeniedException ex) {
+        LOGGER.error("AccessDeniedException", ex);
+
+        return "exception/accessDenied";
+    }
+
     @ExceptionHandler(SystemException.class)
     public String handleException(Model model, SystemException ex) {
         LOGGER.error("SystemException", ex);

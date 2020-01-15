@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import com.contract.annotation.AllowAnonymous;
 import com.contract.consts.WebConsts;
+import com.contract.exception.AccessDeniedException;
 
 public class RequestInterceptor extends HandlerInterceptorAdapter {
     private static final Logger logger = LoggerFactory.getLogger(RequestInterceptor.class);
@@ -54,6 +57,14 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
             response.sendRedirect(request.getContextPath() + "/login?returnPath=" + returnPath(request));
 
             return false;
+        }
+
+        List permissionList = (ArrayList<String>) session.getAttribute(WebConsts.USER_PERMISSION);
+
+        if (permissionList != null
+                && permissionList.size() > 0
+                && !permissionList.contains(returnPath)) {
+            throw new AccessDeniedException("Access Denied");
         }
 
         return true;

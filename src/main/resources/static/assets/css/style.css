@@ -4504,7 +4504,7 @@ File: scss
         background: #ffb22b; }
     .mailbox .message-center a .mail-contnet {
       display: inline-block;
-      width: 75%;
+      width: 100%;
       vertical-align: middle; }
       .mailbox .message-center a .mail-contnet h5 {
         margin: 5px 0px 0; }
