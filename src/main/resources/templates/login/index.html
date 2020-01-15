@@ -38,16 +38,21 @@
         <div class="login-register" style="background-image:url(/assets/images/background/login-register.jpg);">
             <div class="login-box card">
                 <div class="card-body">
-                    <form class="form-horizontal form-material" id="loginform" action="https://wrappixel.com/demos/admin-templates/admin-pro/main/index.html">
+                    <div class="alert alert-success" th:if="${messsage != null}">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                        <h4 class="text-success"><i class="fa fa-check-circle"></i> Thông báo </h4><span th:text="${messsage}"></span>
+                    </div>
+                    <form class="form-horizontal form-material" id="loginform" method="POST" th:action="@{/doLogin}" th:object="${form}">
                         <h3 class="box-title m-b-20">Đăng nhập hệ thống</h3>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="text" required="" placeholder="Tên đăng nhập"> </div>
+                                <input class="form-control" type="text" th:field="*{username}" placeholder="Tên đăng nhập"> </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" required="" placeholder="Mật khẩu"> </div>
+                                <input class="form-control" type="password" th:field="*{password}" placeholder="Mật khẩu"> </div>
                         </div>
+                        <input type="hidden" th:field="*{returnPath}" />
                         <div class="form-group text-center">
                             <div class="col-xs-12 p-b-20">
                                 <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Đăng nhập</button>

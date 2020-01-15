@@ -38,8 +38,8 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Tên</label>
-                                        <input type="text" class="form-control">
+                                        <label>Tài khoản</label>
+                                        <input type="text" class="form-control"  placeholder="Tên người dùng">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -76,16 +76,16 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Danh sách người dùng</h4>
-                        <a href="/user/add"><button type="button" class="btn btn-info btn-rounded m-t-10 float-right">Thêm mới</button></a>
+                        <a th:href="@{/user/add}"><button type="button" class="btn btn-info btn-rounded m-t-10 float-right">Thêm mới</button></a>
                         <div class="table-responsive">
                             <table class="table color-bordered-table muted-bordered-table m-t-30">
                                 <thead>
                                 <tr>
                                     <th width="10px">STT</th>
                                     <th>Tài khoản</th>
-                                    <th>Nhóm</th>
                                     <th>Email</th>
                                     <th>Điện thoại</th>
+                                    <th>Nhóm</th>
                                     <th>Ngày tạo</th>
                                     <th>Tình trạng</th>
                                     <th width="120px" class="text-center">Hành động</th>
@@ -95,9 +95,9 @@
                                     <tr>
                                         <td>1</td>
                                         <td>khanhlv5</td>
-                                        <td>Quản trị</td>
                                         <td>khanhlv5@vpbank.com.vn</td>
                                         <td>0964632825</td>
+                                        <td>Quản trị</td>
                                         <td>14/01/2020</td>
                                         <td>Hoạt động</td>
                                         <td class="text-center">

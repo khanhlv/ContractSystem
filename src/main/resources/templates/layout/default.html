@@ -9,17 +9,15 @@
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png">
         <title th:replace="${title}">Bảng điều khiển</title>
-
-        <link rel="canonical" href="https://www.wrappixel.com/templates/adminpro/" />
         <!-- Bootstrap Core CSS -->
-        <link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/assets/plugins/perfect-scrollbar/dist/css/perfect-scrollbar.min.css" rel="stylesheet">
+        <link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/assets/plugins/perfect-scrollbar/dist/css/perfect-scrollbar.min.css}" rel="stylesheet">
         <!-- Custom CSS -->
-        <link href="/assets/css/style.css" rel="stylesheet">
+        <link th:href="@{/assets/css/style.css}" rel="stylesheet">
         <!-- Dashboard 1 Page CSS -->
         <th:block th:replace="${styleResources} ?: ~{}"></th:block>
         <!-- You can change the theme colors from here -->
-        <link href="/assets/css/colors/default-dark.css" id="theme" rel="stylesheet">
+        <link th:href="@{/assets/css/colors/default-dark.css}" id="theme" rel="stylesheet">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -146,12 +144,12 @@
                                             </div>
                                         </li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="#"><i class="ti-user"></i> Thông tin cá nhân</a></li>
-                                        <li><a href="#"><i class="ti-email"></i> Đổi mật khẩu</a></li>
+                                        <li><a th:href="@{/user/information}"><i class="ti-user"></i> Thông tin cá nhân</a></li>
+                                        <li><a th:href="@{/user/changePassword}"><i class="ti-email"></i> Đổi mật khẩu</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="#"><i class="ti-settings"></i> Cấu hình</a></li>
+                                        <li><a th:href="@{/user/setting}"><i class="ti-settings"></i> Cấu hình</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="#"><i class="fa fa-power-off"></i> Thoát</a></li>
+                                        <li><a th:href="@{/user/logout}"><i class="fa fa-power-off"></i> Thoát</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -176,20 +174,20 @@
                                     <img src="/assets/images/users/profile.png" alt="user" /><span class="hide-menu">Administrator</span>
                                 </a>
                                 <ul aria-expanded="false" class="collapse">
-                                    <li><a href="/user/information">Thông tin cá nhân</a></li>
-                                    <li><a href="/user/changePassword">Đổi mật khẩu</a></li>
-                                    <li><a href="/user/setting">Cấu hình</a></li>
-                                    <li><a href="/user/logout">Thoát</a></li>
+                                    <li><a th:href="@{/user/information}">Thông tin cá nhân</a></li>
+                                    <li><a th:href="@{/user/changePassword}">Đổi mật khẩu</a></li>
+                                    <li><a th:href="@{/user/setting}">Cấu hình</a></li>
+                                    <li><a th:href="@{/user/logout}">Thoát</a></li>
                                 </ul>
                             </li>
                             <li class="nav-devider"></li>
                             <li class="nav-small-cap">Danh mục</li>
-                            <li><a href="/"><i class="mdi mdi-gauge"></i>Bảng điều khiển</a></li>
-                            <li><a href="/category/list"><i class="mdi mdi-file"></i>Danh mục</a></li>
-                            <li><a href="/template/list"><i class="mdi mdi-table"></i>Mẫu hợp đồng</a></li>
-                            <li><a href="/contract/list"><i class="mdi mdi-bullseye"></i>Danh sách hợp đồng</a></li>
-                            <li><a href="/user/list"><i class="mdi mdi-gauge"></i>Người dùng</a></li>
-                            <li><a href="/report/list"><i class="mdi mdi-repeat"></i>Báo cáo</a></li>
+                            <li><a th:href="@{/}"><i class="mdi mdi-gauge"></i>Bảng điều khiển</a></li>
+                            <li><a th:href="@{/category/list}"><i class="mdi mdi-file"></i>Danh mục</a></li>
+                            <li><a th:href="@{/template/list}"><i class="mdi mdi-table"></i>Mẫu hợp đồng</a></li>
+                            <li><a th:href="@{/contract/list}"><i class="mdi mdi-bullseye"></i>Danh sách hợp đồng</a></li>
+                            <li><a th:href="@{/user/list}"><i class="mdi mdi-gauge"></i>Người dùng</a></li>
+                            <li><a th:href="@{/report/list}"><i class="mdi mdi-repeat"></i>Báo cáo</a></li>
                         </ul>
                     </nav>
                     <!-- End Sidebar navigation -->
@@ -230,18 +228,18 @@
         <!-- ============================================================== -->
         <!-- All Jquery -->
         <!-- ============================================================== -->
-        <script src="/assets/plugins/jquery/jquery.min.js"></script>
+        <script th:src="@{/assets/plugins/jquery/jquery.min.js}"></script>
         <!-- Bootstrap popper Core JavaScript -->
-        <script src="/assets/plugins/bootstrap/js/popper.min.js"></script>
-        <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script th:src="@{/assets/plugins/bootstrap/js/popper.min.js}"></script>
+        <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}"></script>
         <!-- slimscrollbar scrollbar JavaScript -->
-        <script src="/assets/js/perfect-scrollbar.jquery.min.js"></script>
+        <script th:src="@{/assets/js/perfect-scrollbar.jquery.min.js}"></script>
         <!--Wave Effects -->
-        <script src="/assets/js/waves.js"></script>
+        <script th:src="@{/assets/js/waves.js}"></script>
         <!--Menu sidebar -->
-        <script src="/assets/js/sidebarmenu.js"></script>
+        <script th:src="@{/assets/js/sidebarmenu.js}"></script>
         <!--Custom JavaScript -->
-        <script src="/assets/js/custom.min.js"></script>
+        <script th:src="@{/assets/js/custom.min.js}"></script>
 
         <th:block th:replace="${jsResources} ?: ~{}"></th:block>
     </body>

@@ -39,15 +39,22 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
 
-//        HttpSession session = request.getSession();
-//
-//        String userId = (String) session.getAttribute(WebConsts.USER_ID);
-//
-//        if (StringUtils.isEmpty(userId)) {
-//            response.sendRedirect(request.getContextPath() + "/login?returnPath=" + returnPath(request));
-//
-//            return false;
-//        }
+        String returnPath = returnPath(request);
+
+        if (returnPath.contains("/login")
+                || returnPath.contains("/error")) {
+            return true;
+        }
+
+        HttpSession session = request.getSession();
+
+        String userId = (String) session.getAttribute(WebConsts.USER_ID);
+
+        if (StringUtils.isEmpty(userId)) {
+            response.sendRedirect(request.getContextPath() + "/login?returnPath=" + returnPath(request));
+
+            return false;
+        }
 
         return true;
     }
