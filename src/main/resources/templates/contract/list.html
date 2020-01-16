@@ -94,35 +94,41 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Danh sách người dùng</h4>
-                        <a href="/user/add"><button type="button" class="btn btn-info btn-rounded m-t-10 float-right">Thêm mới</button></a>
+                        <h4 class="card-title">Danh sách hợp đồng</h4>
+                        <a th:href="@{/contract/add}"><button type="button" class="btn btn-info btn-rounded m-t-10 float-right">Thêm mới</button></a>
                         <div class="table-responsive">
                             <table class="table color-bordered-table muted-bordered-table m-t-30">
                                 <thead>
-                                <tr>
-                                    <th width="10px">STT</th>
-                                    <th>Tài khoản</th>
-                                    <th>Nhóm</th>
-                                    <th>Email</th>
-                                    <th>Điện thoại</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Tình trạng</th>
-                                    <th width="120px" class="text-center">Hành động</th>
-                                </tr>
+                                    <tr>
+                                        <th width="10px">STT</th>
+                                        <th>Số hợp đồng</th>
+                                        <th>Ngày ký</th>
+                                        <th>Ngày bắt đầu</th>
+                                        <!--<th>Tên Gói thầu</th>-->
+                                        <!--<th>Tên chủ quản đầu tư</th>-->
+                                        <th>Tên chủ đầu tư</th>
+                                        <th>Người phụ trách</th>
+                                        <th>Thời gian thực hiện HĐ</th>
+                                        <th>Tình trạng</th>
+                                        <th width="150px" class="text-center">Hành động</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>khanhlv5</td>
-                                    <td>Quản trị</td>
-                                    <td>khanhlv5@vpbank.com.vn</td>
-                                    <td>0964632825</td>
-                                    <td>14/01/2020</td>
-                                    <td>Hoạt động</td>
-                                    <td class="text-center">
-                                        <a href="/user/edit/1">Sửa</a> | <a href="/user/delete/1">Khóa</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>01/2019/HĐTV</td>
+                                        <td>06/01/2019</td>
+                                        <td>06/01/2019</td>
+                                        <!--<td>Mua sắm và lắp đặt máy CT Scanner 32 lát cắt và các phụ kiện thuộc dự án: Bệnh viện Đa khoa Khu vực Quảng Nam</td>-->
+                                        <!--<td>ỦY BAN NHÂN DÂN TỈNH QUẢNG NAM</td>-->
+                                        <td>BVĐK KHU VỰC QUẢNG NAM</td>
+                                        <td>khanhlv5</td>
+                                        <td>45 ngày</td>
+                                        <td>Đang xử lý</td>
+                                        <td class="text-center">
+                                            <a href="/user/edit/1">Tải</a> | <a href="/user/edit/1">Sửa</a> | <a href="/user/delete/1">Xóa</a>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

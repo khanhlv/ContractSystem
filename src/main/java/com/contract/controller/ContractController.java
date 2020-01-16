@@ -13,4 +13,10 @@ public class ContractController extends AbstractController {
     public String index(Model model) {
         return "contract/list";
     }
+
+    @GetMapping("/add")
+    public String add(Model model) {
+
+        return "contract/form";
+    }
 }

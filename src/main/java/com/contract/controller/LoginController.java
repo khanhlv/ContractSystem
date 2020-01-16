@@ -37,11 +37,11 @@ public class LoginController {
         request.getSession(true).setAttribute(WebConsts.USER_ID, "ADMIN");
 
         List<String> permissionList = new ArrayList<>();
-        permissionList.add("/");
-        permissionList.add("/category/list");
-        permissionList.add("/category/add");
-        permissionList.add("/category/edit");
-        permissionList.add("/category/delete");
+//        permissionList.add("/");
+//        permissionList.add("/category/list");
+//        permissionList.add("/category/add");
+//        permissionList.add("/category/edit");
+//        permissionList.add("/category/delete");
         request.getSession(true).setAttribute(WebConsts.USER_PERMISSION, permissionList);
 
         return "redirect:" + loginForm.getReturnPath();

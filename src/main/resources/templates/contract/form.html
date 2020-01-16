@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/default :: default-fragment(
+                                                ~{::title},
+                                                ~{:: #style-resources},
+                                                ~{:: #js-resources},
+                                                ~{:: #main-content}
+                                               )}">
+<head>
+    <title>Thêm mới hợp dồng</title>
+    <th:block id="style-resources"></th:block>
+</head>
+<body>
+    <div id="main-content">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h3 class="text-themecolor">Thêm mới hợp đồng</h3>
+            </div>
+            <div class="col-md-7 align-self-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/contract/list}">Hợp đồng</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-lg-12 ">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Thông tin hợp đồng</h4>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Số hợp đồng</label>
+                                        <input type="text" class="form-control" readonly="readonly" placeholder="Số hợp đồng">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Trị giá gói thầu (VND)</label>
+                                        <input type="text" class="form-control" placeholder="Trị giá gói thầu (VND)">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Trị giá HĐTV (VND)</label>
+                                        <input type="text" class="form-control" placeholder="Trị giá HĐTV (VND)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Tên gói thầu</label>
+                                <input type="text" class="form-control" placeholder="Tên gói thầu">
+                            </div>
+                            <div class="form-group">
+                                <label>Nội dung công việc tư vấn</label>
+                                <textarea rows="5" class="form-control" placeholder="Nội dung công việc tư vấn"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Văn bản phê duyệt KHLCNT</label>
+                                <textarea rows="5" class="form-control" placeholder="Văn bản phê duyệt KHLCNT"></textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Số TBMT</label>
+                                        <input type="text" class="form-control" placeholder="Số TBMT">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Tên chủ quản đầu tư</label>
+                                        <input type="text" class="form-control" placeholder="Tên chủ quản đầu tư">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Tên chủ đầu tư</label>
+                                        <input type="text" class="form-control" placeholder="Tên chủ đầu tư">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ngày bắt đầu</label>
+                                        <input type="text" class="form-control" readonly="readonly" placeholder="Ngày bắt đầu">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ngày ký</label>
+                                        <input type="text" class="form-control" placeholder="Ngày ký">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ngày hoàn thành dự kiến</label>
+                                        <input type="text" class="form-control" placeholder="Ngày hoàn thành dự kiến">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Thời gian thực hiện hợp đồng</label>
+                                        <input type="text" class="form-control"  placeholder="Thời gian thực hiện hợp đồng">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ngày thanh lý</label>
+                                        <input type="text" class="form-control" placeholder="Ngày thanh lý">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Số KHLCNT</label>
+                                        <input type="text" class="form-control" placeholder="Số KHLCNT">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Số TBMT</label>
+                                        <input type="text" class="form-control"  placeholder="Số TBMT">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Số báo cáo</label>
+                                        <input type="text" class="form-control" placeholder="Số báo cáo">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ngày báo cáo</label>
+                                        <input type="text" class="form-control" placeholder="Ngày báo cáo">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Số QĐ Thành lập tổ chuyên gia</label>
+                                        <input type="text" class="form-control"  placeholder="Số QĐ Thành lập tổ chuyên gia">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Số hóa đơn</label>
+                                        <input type="text" class="form-control" placeholder="Số hóa đơn">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ngày xuất HĐ</label>
+                                        <input type="text" class="form-control" placeholder="Ngày xuất HĐ">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ghi chú</label>
+                                <textarea rows="5" class="form-control" placeholder="Ghi chú"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Thông tin liên hệ</label>
+                                <input type="text" class="form-control" placeholder="Thông tin liên hệ">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tình trạng thanh toán</label>
+                                <select class="form-control">
+                                    <option>Đang xử lý</option>
+                                    <option>Chưa thanh toán</option>
+                                    <option>Đã thanh toán</option>
+                                </select>
+                            </div>
+
+                            <button type="button" class="btn btn-success btn-rounded waves-light m-r-10">Lưu lại</button>
+                            <button type="button" class="btn btn-inverse btn-rounded waves-light">Hủy bỏ</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block id="js-resources"></th:block>
+</body>
+</html>
