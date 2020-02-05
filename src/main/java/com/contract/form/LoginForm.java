@@ -4,6 +4,7 @@ public class LoginForm {
     private String returnPath;
     private String username;
     private String password;
+    private String company;
 
     public String getUsername() {
         return username;
@@ -27,5 +28,13 @@ public class LoginForm {
 
     public void setReturnPath(String returnPath) {
         this.returnPath = returnPath;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }

@@ -52,6 +52,15 @@
                             <div class="col-xs-12">
                                 <input class="form-control" type="password" th:field="*{password}" placeholder="Mật khẩu"> </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <select class="form-control"  th:field="*{company}" placeholder="Chọn công ty">
+                                    <option value="1">VPBank</option>
+                                    <option value="2">TechcomBank</option>
+                                    <option value="3">VietcomBank</option>
+                                </select>
+                            </div>
+                        </div>
                         <input type="hidden" th:field="*{returnPath}" />
                         <div class="form-group text-center">
                             <div class="col-xs-12 p-b-20">
