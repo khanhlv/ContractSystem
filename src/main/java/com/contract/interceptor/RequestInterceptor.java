@@ -51,9 +51,9 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 
         HttpSession session = request.getSession();
 
-        String userId = (String) session.getAttribute(WebConsts.USER_ID);
+        Long userId = (Long) session.getAttribute(WebConsts.USER_ID);
 
-        if (StringUtils.isEmpty(userId)) {
+        if (userId == null) {
             response.sendRedirect(request.getContextPath() + "/login?returnPath=" + returnPath(request));
 
             return false;

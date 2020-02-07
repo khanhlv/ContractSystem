@@ -38,7 +38,7 @@
         <div class="login-register" style="background-image:url(/assets/images/background/login-register.jpg);">
             <div class="login-box card">
                 <div class="card-body">
-                    <div class="alert alert-success" th:if="${messsage != null}">
+                    <div class="alert alert-warning" th:if="${messsage != null}">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
                         <h4 class="text-success"><i class="fa fa-check-circle"></i> Thông báo </h4><span th:text="${messsage}"></span>
                     </div>
@@ -54,10 +54,10 @@
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <select class="form-control"  th:field="*{company}" placeholder="Chọn công ty">
-                                    <option value="1">VPBank</option>
-                                    <option value="2">TechcomBank</option>
-                                    <option value="3">VietcomBank</option>
+                                <select class="form-control" th:field="*{company}" placeholder="Chọn công ty">
+                                    <option th:each="company: ${companyList}"
+                                            th:value="${company.getCompanyId()}"
+                                            th:text="${company.getCompanyName()}">VPBank</option>
                                 </select>
                             </div>
                         </div>

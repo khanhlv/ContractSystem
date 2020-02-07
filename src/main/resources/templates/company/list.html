@@ -34,39 +34,39 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Tìm kiếm công ty</h4>
-                        <form>
+                        <form method="GET" th:action="@{/company/list}" th:object="${form}">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Tên công ty</label>
-                                        <input type="text" class="form-control" placeholder="Tên công ty">
+                                        <input type="text" class="form-control" th:field="*{companyName}" placeholder="Tên công ty">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Số điện thoại</label>
-                                        <input type="text" class="form-control" placeholder="Số điện thoại">
+                                        <input type="text" class="form-control" th:field="*{companyPhone}" placeholder="Số điện thoại">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="text" class="form-control" placeholder="Email">
+                                        <input type="text" class="form-control" th:field="*{companyEmail}" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Tình trạng</label>
-                                        <select class="form-control">
-                                            <option>Tất cả</option>
-                                            <option>Hoạt động</option>
-                                            <option>Không hoạt động</option>
+                                        <select class="form-control" th:field="*{status}">
+                                            <option value="-1">Tất cả</option>
+                                            <option value="1">Hoạt động</option>
+                                            <option value="0">Không hoạt động</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="button" class="btn btn-info btn-rounded m-t-10">Tìm kiếm</button>
+                            <button type="submit" class="btn btn-info btn-rounded m-t-10">Tìm kiếm</button>
                         </form>
                     </div>
                 </div>
@@ -92,15 +92,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>VPBank</td>
-                                        <td>19001731</td>
-                                        <td>hotro@vpbank.com.vn</td>
-                                        <td>14/01/2020</td>
-                                        <td>Hoạt động</td>
+                                    <tr th:each="company, row: ${companyList}">
+                                        <td th:text="${row.count}"></td>
+                                        <td th:text="${company.getCompanyName()}">VPBank</td>
+                                        <td th:text="${company.getCompanyPhone()}">19001731</td>
+                                        <td th:text="${company.getCompanyEmail()}">hotro@vpbank.com.vn</td>
+                                        <td th:text="${company.getCreatedDate()}">14/01/2020</td>
+                                        <td th:text="${company.getStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
                                         <td class="text-center">
-                                            <a href="/company/edit/1">Sửa</a> | <a href="/company/delete/1">Xóa</a>
+                                            <a th:href="${'/company/edit/' + company.getCompanyId()}">Sửa</a> | <a th:href="${'/company/delete/' + company.getCompanyId()}">Xóa</a>
                                         </td>
                                     </tr>
                                 </tbody>
