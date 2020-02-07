@@ -100,7 +100,8 @@
                                         <td th:text="${company.getCreatedDate()}">14/01/2020</td>
                                         <td th:text="${company.getStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
                                         <td class="text-center">
-                                            <a th:href="${'/company/edit/' + company.getCompanyId()}">Sửa</a> | <a th:href="${'/company/delete/' + company.getCompanyId()}">Xóa</a>
+                                            <a th:href="${'/company/edit/' + company.getCompanyId()}">Sửa</a> | <a onclick="return confirm('Bạn có thật sự muốn xóa bản ghi?');"
+                                                                                                                   th:href="${'/company/delete/' + company.getCompanyId()}">Xóa</a>
                                         </td>
                                     </tr>
                                 </tbody>
