@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/default :: default-fragment(
+                                                ~{::title},
+                                                ~{:: #style-resources},
+                                                ~{:: #js-resources},
+                                                ~{:: #main-content}
+                                               )}">
+<head>
+    <title>Thêm mới người dùng</title>
+    <th:block id="style-resources"></th:block>
+</head>
+<body>
+    <div id="main-content">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h3 class="text-themecolor">Thêm mới người dùng</h3>
+            </div>
+            <div class="col-md-7 align-self-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/user/list}">Người dùng</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-lg-12 ">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Thông tin người dùng</h4>
+                        <div class="alert alert-warning" th:if="${messsage != null}">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                            <h4 class="text-info"><i class="fa fa-check-circle"></i> Thông báo </h4><span th:text="${messsage}"></span>
+                            <span class="redirectPath" th:text="${redirectPath}" style="display: none"></span>
+                            <script>
+                                setInterval(function() {
+                                    window.location = contextPath + $('.redirectPath').text();
+                                }, 2000)
+                            </script>
+                        </div>
+                        <form method="POST" th:action="@{/user/doSave}" th:object="${form}">
+                            <input type="hidden" class="form-control"  th:field="*{userId}">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label>Tài khoản</label>
+                                    <input type="text" class="form-control"  th:field="*{username}" placeholder="Tài khoản">
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label>Mậu khẩu</label>
+                                    <input type="password" class="form-control"  th:field="*{password}" placeholder="Mật khẩu">
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label>Công ty</label>
+                                    <select class="form-control" th:field="*{companyId}" placeholder="Chọn công ty">
+                                        <option th:each="company: ${companyList}"
+                                                th:value="${company.getCompanyId()}"
+                                                th:text="${company.getCompanyName()}">VPBank</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label>Họ và tên</label>
+                                    <input type="text" class="form-control"  th:field="*{fullName}" placeholder="Họ và tên">
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label>Số điện thoại</label>
+                                    <input type="text" class="form-control"  th:field="*{phone}" placeholder="Số điện thoại">
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label>Email</label>
+                                    <input type="text" class="form-control"  th:field="*{email}" placeholder="Email">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Địa chỉ</label>
+                                <input type="text" class="form-control"  th:field="*{address}" placeholder="Địa chỉ">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nhóm người dùng</label>
+                                <select class="form-control" th:field="*{userGroupId}" placeholder="Nhóm người dùng">
+                                    <option th:each="userGroup: ${userGroupList}"
+                                            th:value="${userGroup.getUserGroupId()}"
+                                            th:text="${userGroup.getUserGroupName()}">VPBank</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tình trạng</label>
+                                <select class="form-control"  th:field="*{status}">
+                                    <option value="1">Hoạt động</option>
+                                    <option value="0">Không hoạt động</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-rounded waves-light m-r-10">Lưu lại</button>
+                            <button type="reset" class="btn btn-inverse btn-rounded waves-light">Hủy bỏ</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block id="js-resources"></th:block>
+</body>
+</html>

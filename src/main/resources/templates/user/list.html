@@ -34,38 +34,61 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Tìm kiếm người dùng</h4>
-                        <form>
+                        <form method="GET" th:action="@{/user/list}" th:object="${form}">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Tài khoản</label>
-                                        <input type="text" class="form-control"  placeholder="Tên người dùng">
+                                        <input type="text" class="form-control" th:field="*{username}"  placeholder="Tài khoản">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Nhóm người dùng</label>
-                                        <select class="form-control">
-                                            <option>Tất cả</option>
-                                            <option>Quản trị</option>
-                                            <option>Quản lý</option>
-                                            <option>Nhân viên</option>
+                                        <label>Email</label>
+                                        <input type="text" class="form-control" th:field="*{email}"  placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Số điện thoại</label>
+                                        <input type="text" class="form-control" th:field="*{phone}"  placeholder="Số điện thoại">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Nhóm</label>
+                                        <select class="form-control" th:field="*{userGroupId}" placeholder="Nhóm người dùng">
+                                            <option value="-1">Tất cả</option>
+                                            <option th:each="userGroup: ${userGroupList}"
+                                                    th:value="${userGroup.getUserGroupId()}"
+                                                    th:text="${userGroup.getUserGroupName()}">VPBank</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Công ty</label>
+                                        <select class="form-control" th:field="*{companyId}" placeholder="Chọn công ty">
+                                            <option value="-1">Tất cả</option>
+                                            <option th:each="company: ${companyList}"
+                                                    th:value="${company.getCompanyId()}"
+                                                    th:text="${company.getCompanyName()}">VPBank</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Tình trạng</label>
-                                        <select class="form-control">
-                                            <option>Tất cả</option>
-                                            <option>Hoạt động</option>
-                                            <option>Không hoạt động</option>
+                                        <select class="form-control" th:field="*{status}">
+                                            <option value="-1">Tất cả</option>
+                                            <option value="1">Hoạt động</option>
+                                            <option value="0">Không hoạt động</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="button" class="btn btn-info btn-rounded m-t-10">Tìm kiếm</button>
+                            <button type="submit" class="btn btn-info btn-rounded m-t-10">Tìm kiếm</button>
                         </form>
                     </div>
                 </div>
@@ -85,27 +108,32 @@
                                     <th>Tài khoản</th>
                                     <th>Email</th>
                                     <th>Điện thoại</th>
-                                    <th>Nhóm</th>
                                     <th>Ngày tạo</th>
                                     <th>Tình trạng</th>
-                                    <th width="120px" class="text-center">Hành động</th>
+                                    <th width="80px" class="text-center"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>khanhlv5</td>
-                                        <td>khanhlv5@vpbank.com.vn</td>
-                                        <td>0964632825</td>
-                                        <td>Quản trị</td>
-                                        <td>14/01/2020</td>
-                                        <td>Hoạt động</td>
+                                    <tr th:each="user, row: ${userList}">
+                                        <td th:text="${row.count}"></td>
+                                        <td th:text="${user.getUsername()}">khanhlv5</td>
+                                        <td th:text="${user.getEmail()}">khanhlv5@vpbank.com.vn</td>
+                                        <td th:text="${user.getPhone()}">0964632825</td>
+                                        <td th:text="${#dates.format(user.getCreatedDate(), 'dd/MM/yyyy')}">14/01/2020</td>
+                                        <td th:text="${user.getStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
                                         <td class="text-center">
-                                            <a href="/user/edit/1">Sửa</a> | <a href="/user/delete/1">Khóa</a>
+                                            <a data-toggle="tooltip" title="Sửa" th:href="${'/user/edit/' + user.getUserId()}"><i class="fas fa-edit"></i></a>
+                                            <a data-toggle="tooltip" title="Xóa" onclick="return confirm('Bạn có thật sự muốn xóa bản ghi?');"
+                                               th:href="${'/user/delete/' + user.getUserId()}"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="pagination-box">
+                            <ul id="pagination" class="pagination-sm"
+                                th:attr="data-total=${form.getTotalRecord()}, data-size=${form.getLimit()}, data-page=${form.getPage()}"
+                                data-url="/user/list"></ul>
                         </div>
                     </div>
                 </div>

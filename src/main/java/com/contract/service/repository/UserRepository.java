@@ -14,6 +14,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
     User checkLogin(@Param(value = "username") String username,
                     @Param(value = "password") String password,
                     @Param(value = "companyId") Long companyId);
+
     @Query(
             value = "SELECT * FROM [USER]",
             countQuery = "SELECT count(1) FROM [USER]",

@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.contract.form.UserForm;
 import com.contract.model.User;
 import com.contract.service.repository.UserRepository;
 
@@ -21,12 +23,19 @@ public class UserService {
         return userRepository.checkLogin(username, password, companyId);
     }
 
-    public List<User> findAllWithPagination(Long page, Long limit){
-        Pageable pageable = PageRequest.of(page.intValue(), limit.intValue());
+    public List<User> findAllWithPagination(UserForm userForm){
+        Pageable pageable = PageRequest.of(
+                userForm.getPage().intValue() == 0 ? 0 : userForm.getPage().intValue() - 1,
+                userForm.getLimit().intValue());
 
-        return userRepository
-                .findAllWithPagination(pageable)
-                .stream()
-                .collect(Collectors.toList());
+        Page<User>  pageList = userRepository
+                .findAllWithPagination(pageable);
+        userForm.setTotalRecord(pageList.getTotalElements());
+
+        return pageList.stream().collect(Collectors.toList());
+    }
+
+    public UserRepository getUserRepository() {
+        return userRepository;
     }
 }

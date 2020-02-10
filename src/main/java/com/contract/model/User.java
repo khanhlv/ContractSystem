@@ -3,7 +3,7 @@ package com.contract.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USER", schema = "dbo")
+@Table(name = "[USER]", schema = "dbo")
 public class User extends BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
