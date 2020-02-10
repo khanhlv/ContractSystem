@@ -1,14 +1,20 @@
 package com.contract.controller;
 
-import com.contract.consts.WebConsts;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 
-import javax.servlet.http.HttpServletRequest;
+import com.contract.consts.WebConsts;
+import com.contract.model.User;
 
 @Controller
 public abstract class AbstractController {
-    protected String getUserId(HttpServletRequest request) {
-        return (String) request.getSession(false).getAttribute(WebConsts.USER_ID);
+    protected Long getUserId(HttpServletRequest request) {
+        return (Long) request.getSession(false).getAttribute(WebConsts.USER_ID);
+    }
+
+    protected User getUser(HttpServletRequest request) {
+        return (User) request.getSession(false).getAttribute(WebConsts.USER);
     }
 
 }

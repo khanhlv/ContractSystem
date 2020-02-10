@@ -1,5 +1,8 @@
 package com.contract.exception;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
@@ -25,11 +28,23 @@ public class CustomizedExceptionHandler {
         return "exception/accessDenied";
     }
 
+    @ExceptionHandler(NotFoundDBException.class)
+    public String handleAccessDenied(Model model, NotFoundDBException ex) {
+        LOGGER.error("NotFoundDBException", ex);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        model.addAttribute("timestamp", simpleDateFormat.format(new Date()));
+        model.addAttribute("message", ex.getMessage());
+
+        return "exception/notFoundDB";
+    }
+
     @ExceptionHandler(SystemException.class)
     public String handleException(Model model, SystemException ex) {
         LOGGER.error("SystemException", ex);
 
-        model.addAttribute("timestamp", System.currentTimeMillis());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        model.addAttribute("timestamp", simpleDateFormat.format(new Date()));
         model.addAttribute("message", ex.getMessage());
 
         return "exception/system";

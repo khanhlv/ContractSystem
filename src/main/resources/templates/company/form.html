@@ -35,42 +35,53 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Thông tin công ty</h4>
-                        <form>
+                        <div class="alert alert-warning" th:if="${messsage != null}">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                            <h4 class="text-info"><i class="fa fa-check-circle"></i> Thông báo </h4><span th:text="${messsage}"></span>
+                            <span class="redirectPath" th:text="${redirectPath}" style="display: none"></span>
+                            <script>
+                                setInterval(function() {
+                                    window.location = contextPath + $('.redirectPath').text();
+                                }, 2000)
+                            </script>
+                        </div>
+                        <form method="POST" th:action="@{/company/doSave}" th:object="${form}">
+                            <input type="hidden" class="form-control"  th:field="*{companyId}" placeholder="Tên công ty">
                             <div class="form-group">
                                 <label>Tên công ty</label>
-                                <input type="text" class="form-control" placeholder="Tên công ty">
+                                <input type="text" class="form-control"  th:field="*{companyName}" placeholder="Tên công ty">
                             </div>
 
                             <div class="form-group">
                                 <label>Địa chỉ</label>
-                                <input type="text" class="form-control" placeholder="Địa chỉ danh mục">
+                                <input type="text" class="form-control"  th:field="*{companyAddress}" placeholder="Địa chỉ">
                             </div>
 
                             <div class="form-group">
                                 <label>Số điện thoại</label>
-                                <input type="text" class="form-control" placeholder="Số điện thoại">
+                                <input type="text" class="form-control"  th:field="*{companyPhone}" placeholder="Số điện thoại">
                             </div>
 
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="text" class="form-control" placeholder="Email">
+                                <input type="text" class="form-control"  th:field="*{companyEmail}" placeholder="Email">
                             </div>
 
                             <div class="form-group">
                                 <label>Mô tả công ty</label>
-                                <textarea rows="5" class="form-control" placeholder="Mô tả công ty"></textarea>
+                                <textarea rows="5" class="form-control"  th:field="*{companyDescription}" placeholder="Mô tả"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label>Tình trạng</label>
-                                <select class="form-control">
-                                    <option>Hoạt động</option>
-                                    <option>Không hoạt động</option>
+                                <select class="form-control"  th:field="*{status}">
+                                    <option value="1">Hoạt động</option>
+                                    <option value="0">Không hoạt động</option>
                                 </select>
                             </div>
 
-                            <button type="button" class="btn btn-success btn-rounded waves-light m-r-10">Lưu lại</button>
-                            <button type="button" class="btn btn-inverse btn-rounded waves-light">Hủy bỏ</button>
+                            <button type="submit" class="btn btn-success btn-rounded waves-light m-r-10">Lưu lại</button>
+                            <button type="reset" class="btn btn-inverse btn-rounded waves-light">Hủy bỏ</button>
 
                         </form>
                     </div>
