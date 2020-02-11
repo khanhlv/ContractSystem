@@ -35,27 +35,37 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Thông tin danh mục</h4>
-                        <form>
+                        <div class="alert alert-warning" th:if="${messsage != null}">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                            <h4 class="text-info"><i class="fa fa-check-circle"></i> Thông báo </h4><span th:text="${messsage}"></span>
+                            <span class="redirectPath" th:text="${redirectPath}" style="display: none"></span>
+                            <script>
+                                setInterval(function() {
+                                    window.location = contextPath + $('.redirectPath').text();
+                                }, 2000)
+                            </script>
+                        </div>
+                        <form method="POST" th:action="@{/category/doSave}" th:object="${form}">
                             <div class="form-group">
                                 <label>Tên danh mục</label>
-                                <input type="text" class="form-control" placeholder="Tên danh mục">
+                                <input type="text" class="form-control" th:field="*{categoryName}" placeholder="Tên danh mục">
                             </div>
 
                             <div class="form-group">
                                 <label>Mô tả danh mục</label>
-                                <textarea rows="5" class="form-control" placeholder="Mô tả danh mục"></textarea>
+                                <textarea rows="5" class="form-control" th:field="*{categoryDescription}" placeholder="Mô tả danh mục"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label>Tình trạng</label>
-                                <select class="form-control">
-                                    <option>Hoạt động</option>
-                                    <option>Không hoạt động</option>
+                                <select class="form-control"  th:field="*{status}">
+                                    <option value="1">Hoạt động</option>
+                                    <option value="0">Không hoạt động</option>
                                 </select>
                             </div>
 
-                            <button type="button" class="btn btn-success btn-rounded waves-light m-r-10">Lưu lại</button>
-                            <button type="button" class="btn btn-inverse btn-rounded waves-light">Hủy bỏ</button>
+                            <button type="submit" class="btn btn-success btn-rounded waves-light m-r-10">Lưu lại</button>
+                            <button type="reset" class="btn btn-inverse btn-rounded waves-light">Hủy bỏ</button>
 
                         </form>
                     </div>

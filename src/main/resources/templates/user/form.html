@@ -60,7 +60,7 @@
 
                                 <div class="form-group col-md-4">
                                     <label>Công ty</label>
-                                    <select class="form-control" th:field="*{companyId}" placeholder="Chọn công ty">
+                                    <select class="form-control" th:field="*{company.companyId}" placeholder="Chọn công ty">
                                         <option th:each="company: ${companyList}"
                                                 th:value="${company.getCompanyId()}"
                                                 th:text="${company.getCompanyName()}">VPBank</option>
@@ -91,7 +91,7 @@
 
                             <div class="form-group">
                                 <label>Nhóm người dùng</label>
-                                <select class="form-control" th:field="*{userGroupId}" placeholder="Nhóm người dùng">
+                                <select class="form-control" th:field="*{userGroup.userGroupId}" placeholder="Nhóm người dùng">
                                     <option th:each="userGroup: ${userGroupList}"
                                             th:value="${userGroup.getUserGroupId()}"
                                             th:text="${userGroup.getUserGroupName()}">VPBank</option>

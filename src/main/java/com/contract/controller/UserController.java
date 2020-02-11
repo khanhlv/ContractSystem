@@ -140,6 +140,10 @@ public class UserController extends AbstractController {
     public String logout(Model model, HttpServletRequest request) {
 
         request.getSession(false).removeAttribute(WebConsts.USER_ID);
+        request.getSession(false).removeAttribute(WebConsts.COMPANY);
+        request.getSession(false).removeAttribute(WebConsts.USER_PERMISSION);
+        request.getSession(false).removeAttribute(WebConsts.EMAIL);
+        request.getSession(false).removeAttribute(WebConsts.FULL_NAME);
 
         return "redirect:/login";
     }

@@ -7,7 +7,9 @@ public final class WebConsts {
 
     public static final String USER_ID = "USER_ID";
 
-    public static final String USER = "USER";
+    public static final String FULL_NAME = "FULL_NAME";
+    public static final String EMAIL = "EMAIL";
+    public static final String COMPANY = "COMPANY";
 
     public static final Long PAGE_SIZE = 10L;
 

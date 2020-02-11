@@ -33,7 +33,7 @@
             <div class="col-lg-12 ">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tìm kiếm người dùng</h4>
+                        <h4 class="card-title">Tìm kiếm</h4>
                         <form method="GET" th:action="@{/user/list}" th:object="${form}">
                             <div class="row">
                                 <div class="col-md-3">
@@ -57,7 +57,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Nhóm</label>
-                                        <select class="form-control" th:field="*{userGroupId}" placeholder="Nhóm người dùng">
+                                        <select class="form-control" th:field="*{userGroup.userGroupId}" placeholder="Nhóm người dùng">
                                             <option value="-1">Tất cả</option>
                                             <option th:each="userGroup: ${userGroupList}"
                                                     th:value="${userGroup.getUserGroupId()}"
@@ -68,7 +68,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Công ty</label>
-                                        <select class="form-control" th:field="*{companyId}" placeholder="Chọn công ty">
+                                        <select class="form-control" th:field="*{company.companyId}" placeholder="Chọn công ty">
                                             <option value="-1">Tất cả</option>
                                             <option th:each="company: ${companyList}"
                                                     th:value="${company.getCompanyId()}"
@@ -108,6 +108,8 @@
                                     <th>Tài khoản</th>
                                     <th>Email</th>
                                     <th>Điện thoại</th>
+                                    <th>Công ty</th>
+                                    <th>Nhóm</th>
                                     <th>Ngày tạo</th>
                                     <th>Tình trạng</th>
                                     <th width="80px" class="text-center"></th>
@@ -119,6 +121,8 @@
                                         <td th:text="${user.getUsername()}">khanhlv5</td>
                                         <td th:text="${user.getEmail()}">khanhlv5@vpbank.com.vn</td>
                                         <td th:text="${user.getPhone()}">0964632825</td>
+                                        <td th:text="${user.getCompany().getCompanyName()}">VPBank</td>
+                                        <td th:text="${user.getUserGroup().getUserGroupName()}">Quản trị</td>
                                         <td th:text="${#dates.format(user.getCreatedDate(), 'dd/MM/yyyy')}">14/01/2020</td>
                                         <td th:text="${user.getStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
                                         <td class="text-center">

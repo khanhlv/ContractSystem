@@ -64,7 +64,9 @@ public class LoginController {
         }
 
         request.getSession(true).setAttribute(WebConsts.USER_ID, user.getUserId());
-        request.getSession(true).setAttribute(WebConsts.USER, user);
+        request.getSession(true).setAttribute(WebConsts.FULL_NAME, user.getFullName());
+        request.getSession(true).setAttribute(WebConsts.EMAIL, user.getEmail());
+        request.getSession(true).setAttribute(WebConsts.COMPANY, user.getCompany());
 
         List<String> permissionList = new ArrayList<>();
         request.getSession(true).setAttribute(WebConsts.USER_PERMISSION, permissionList);

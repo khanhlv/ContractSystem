@@ -10,11 +10,13 @@ public class User extends BaseModel {
     @Column(nullable = false, name = "USER_ID")
     private Long userId;
 
-    @Column(name = "USER_GROUP_ID")
-    private Long userGroupId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_GROUP_ID")
+    private UserGroup userGroup;
 
-    @Column(name = "COMPANY_ID")
-    private Long companyId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "COMPANY_ID")
+    private Company company;
 
     @Column(name = "USERNAME")
     private String username;
@@ -42,20 +44,12 @@ public class User extends BaseModel {
         this.userId = userId;
     }
 
-    public Long getUserGroupId() {
-        return userGroupId;
+    public UserGroup getUserGroup() {
+        return userGroup;
     }
 
-    public void setUserGroupId(Long userGroupId) {
-        this.userGroupId = userGroupId;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
+    public void setUserGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
     }
 
     public String getUsername() {
@@ -104,5 +98,13 @@ public class User extends BaseModel {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

@@ -16,8 +16,26 @@ public interface UserRepository extends CrudRepository<User, Long> {
                     @Param(value = "companyId") Long companyId);
 
     @Query(
-            value = "SELECT * FROM [USER]",
-            countQuery = "SELECT count(1) FROM [USER]",
+            value = "SELECT * FROM [USER] " +
+                    "WHERE (:username = '' OR USERNAME LIKE :username) " +
+                    "AND (:email = '' OR EMAIL = :email) " +
+                    "AND (:phone = '' OR PHONE = :phone) " +
+                    "AND (:userGroupId = '' OR USER_GROUP_ID = :userGroupId) " +
+                    "AND (:companyId = '' OR COMPANY_ID = :companyId) " +
+                    "AND (:status = '-1' OR STATUS = :status)",
+            countQuery = "SELECT count(1) FROM [USER] " +
+                    "WHERE (:username = '' OR USERNAME LIKE :username) " +
+                    "AND (:email = '' OR EMAIL = :email) " +
+                    "AND (:phone = '' OR PHONE = :phone) " +
+                    "AND (:userGroupId = '' OR USER_GROUP_ID = :userGroupId) " +
+                    "AND (:companyId = '' OR COMPANY_ID = :companyId) " +
+                    "AND (:status = '-1' OR STATUS = :status)",
             nativeQuery = true)
-    Page<User> findAllWithPagination(Pageable pageable);
+    Page<User> findAllWithPagination(@Param("username") String username,
+                                     @Param("email") String email,
+                                     @Param("phone") String phone,
+                                     @Param("userGroupId") Long userGroupId,
+                                     @Param("companyId") Long companyId,
+                                     @Param("status") Long status,
+                                     Pageable pageable);
 }

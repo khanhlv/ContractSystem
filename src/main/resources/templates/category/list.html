@@ -33,28 +33,28 @@
             <div class="col-lg-12 ">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Tìm kiếm danh mục</h4>
-                        <form>
+                        <h4 class="card-title">Tìm kiếm</h4>
+                        <form method="GET" th:action="@{/category/list}" th:object="${form}">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Tên danh mục</label>
-                                        <input type="text" class="form-control" placeholder="Tên danh mục">
+                                        <input type="text" class="form-control" th:field="*{categoryName}" placeholder="Tên danh mục">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Tình trạng</label>
-                                        <select class="form-control">
-                                            <option>Tất cả</option>
-                                            <option>Hoạt động</option>
-                                            <option>Không hoạt động</option>
+                                        <select class="form-control" th:field="*{status}">
+                                            <option value="-1">Tất cả</option>
+                                            <option value="1">Hoạt động</option>
+                                            <option value="0">Không hoạt động</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="button" class="btn btn-info btn-rounded m-t-10">Tìm kiếm</button>
+                            <button type="submit" class="btn btn-info btn-rounded m-t-10">Tìm kiếm</button>
                         </form>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Danh sách danh mục</h4>
-                        <a href="/category/add"><button type="button" class="btn btn-info btn-rounded m-t-10 float-right">Thêm mới</button></a>
+                        <a th:href="@{/category/add}"><button type="button" class="btn btn-info btn-rounded m-t-10 float-right">Thêm mới</button></a>
                         <div class="table-responsive">
                             <table class="table color-bordered-table muted-bordered-table m-t-30">
                                 <thead>
@@ -74,21 +74,28 @@
                                         <th>Tên danh mục</th>
                                         <th>Ngày tạo</th>
                                         <th>Tình trạng</th>
-                                        <th width="120px" class="text-center">Hành động</th>
+                                        <th width="80px" class="text-center"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Đầu thầu</td>
-                                        <td>14/01/2020</td>
-                                        <td>Hoạt động</td>
+                                    <tr th:each="category, row: ${categoryList}">
+                                        <td th:text="${row.count}"></td>
+                                        <td th:text="${category.getCategoryName()}">khanhlv5</td>
+                                        <td th:text="${#dates.format(category.getCreatedDate(), 'dd/MM/yyyy')}">14/01/2020</td>
+                                        <td th:text="${category.getStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
                                         <td class="text-center">
-                                            <a href="/category/edit/1">Sửa</a> | <a href="/category/delete/1">Xóa</a>
+                                            <a data-toggle="tooltip" title="Sửa" th:href="${'/category/edit/' + category.getCategoryId()}"><i class="fas fa-edit"></i></a>
+                                            <a data-toggle="tooltip" title="Xóa" onclick="return confirm('Bạn có thật sự muốn xóa bản ghi?');"
+                                               th:href="${'/category/delete/' + category.getCategoryId()}"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="pagination-box">
+                            <ul id="pagination" class="pagination-sm"
+                                th:attr="data-total=${form.getTotalRecord()}, data-size=${form.getLimit()}, data-page=${form.getPage()}"
+                                data-url="/category/list"></ul>
                         </div>
                     </div>
                 </div>

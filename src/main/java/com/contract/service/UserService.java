@@ -3,6 +3,7 @@ package com.contract.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,11 +29,18 @@ public class UserService {
                 userForm.getPage().intValue() == 0 ? 0 : userForm.getPage().intValue() - 1,
                 userForm.getLimit().intValue());
 
-        Page<User>  pageList = userRepository
-                .findAllWithPagination(pageable);
-        userForm.setTotalRecord(pageList.getTotalElements());
+        Page<User> page = userRepository
+                .findAllWithPagination(
+                        StringUtils.defaultString(userForm.getUsername(), StringUtils.EMPTY),
+                        StringUtils.defaultString(userForm.getEmail(), StringUtils.EMPTY),
+                        StringUtils.defaultString(userForm.getPhone(), StringUtils.EMPTY),
+                        userForm.getCompany().getCompanyId() == null ? -1L : userForm.getCompany().getCompanyId(),
+                        userForm.getUserGroup().getUserGroupId() == null ? -1L : userForm.getUserGroup().getUserGroupId(),
+                        userForm.getStatus() == null ? -1L : userForm.getStatus(),
+                        pageable);
+        userForm.setTotalRecord(page.getTotalElements());
 
-        return pageList.stream().collect(Collectors.toList());
+        return page.stream().collect(Collectors.toList());
     }
 
     public UserRepository getUserRepository() {

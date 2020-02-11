@@ -12,11 +12,13 @@ public class UserPermission {
     @Column(nullable = false, name = "USER_PERMISSION_ID")
     private Long userPermissionId;
 
-    @Column(name = "USER_GROUP_ID")
-    private String userGroupId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_GROUP_ID")
+    private UserGroup userGroup;
 
-    @Column(name = "MODULE_ID")
-    private Long moduleId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MODULE_ID")
+    private Module module;
 
     @Column(name = "CREATED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
@@ -33,20 +35,20 @@ public class UserPermission {
         this.userPermissionId = userPermissionId;
     }
 
-    public String getUserGroupId() {
-        return userGroupId;
+    public UserGroup getUserGroup() {
+        return userGroup;
     }
 
-    public void setUserGroupId(String userGroupId) {
-        this.userGroupId = userGroupId;
+    public void setUserGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
     }
 
-    public Long getModuleId() {
-        return moduleId;
+    public Module getModule() {
+        return module;
     }
 
-    public void setModuleId(Long moduleId) {
-        this.moduleId = moduleId;
+    public void setModule(Module module) {
+        this.module = module;
     }
 
     public Date getCreatedDate() {

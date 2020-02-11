@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 
 import com.contract.consts.WebConsts;
-import com.contract.model.User;
+import com.contract.model.Company;
 
 @Controller
 public abstract class AbstractController {
@@ -13,8 +13,7 @@ public abstract class AbstractController {
         return (Long) request.getSession(false).getAttribute(WebConsts.USER_ID);
     }
 
-    protected User getUser(HttpServletRequest request) {
-        return (User) request.getSession(false).getAttribute(WebConsts.USER);
+    protected Company getCompany(HttpServletRequest request) {
+        return (Company) request.getSession(false).getAttribute(WebConsts.COMPANY);
     }
-
 }

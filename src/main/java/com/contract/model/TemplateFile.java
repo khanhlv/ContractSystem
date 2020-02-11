@@ -10,7 +10,11 @@ public class TemplateFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, name = "TEMPLATE_FILE_ID")
-    private Long templateId;
+    private Long templateFileId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TEMPLATE_ID")
+    private Template template;
 
     @Column(name = "TEMPLATE_FILE_NAME")
     private String templateFileName;
@@ -25,12 +29,20 @@ public class TemplateFile {
     @Column(name = "CREATED_USER_ID")
     private Long createdUserId;
 
-    public Long getTemplateId() {
-        return templateId;
+    public Template getTemplate() {
+        return template;
     }
 
-    public void setTemplateId(Long templateId) {
-        this.templateId = templateId;
+    public void setTemplate(Template template) {
+        this.template = template;
+    }
+
+    public Long getTemplateFileId() {
+        return templateFileId;
+    }
+
+    public void setTemplateFileId(Long templateFileId) {
+        this.templateFileId = templateFileId;
     }
 
     public String getTemplateFileName() {
