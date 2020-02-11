@@ -1,7 +1,5 @@
 package com.contract.model;
 
-import java.util.Date;
-
 import javax.persistence.*;
 
 @Entity
@@ -19,13 +17,6 @@ public class UserPermission {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MODULE_ID")
     private Module module;
-
-    @Column(name = "CREATED_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-
-    @Column(name = "CREATED_USER_ID")
-    private Long createdUserId;
 
     public Long getUserPermissionId() {
         return userPermissionId;
@@ -49,21 +40,5 @@ public class UserPermission {
 
     public void setModule(Module module) {
         this.module = module;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Long getCreatedUserId() {
-        return createdUserId;
-    }
-
-    public void setCreatedUserId(Long createdUserId) {
-        this.createdUserId = createdUserId;
     }
 }

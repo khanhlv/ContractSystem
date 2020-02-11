@@ -1,10 +1,13 @@
 package com.contract.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.contract.annotation.AllowAnonymous;
+import com.contract.consts.WebConsts;
+import com.contract.form.LoginForm;
+import com.contract.model.User;
+import com.contract.model.UserPermission;
+import com.contract.service.CompanyService;
+import com.contract.service.UserPermissionService;
+import com.contract.service.UserService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,12 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.contract.annotation.AllowAnonymous;
-import com.contract.consts.WebConsts;
-import com.contract.form.LoginForm;
-import com.contract.model.User;
-import com.contract.service.CompanyService;
-import com.contract.service.UserService;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -28,6 +28,9 @@ public class LoginController {
 
     @Autowired
     private CompanyService companyService;
+
+    @Autowired
+    private UserPermissionService userPermissionService;
 
     @GetMapping("/login")
     @AllowAnonymous
@@ -68,7 +71,13 @@ public class LoginController {
         request.getSession(true).setAttribute(WebConsts.EMAIL, user.getEmail());
         request.getSession(true).setAttribute(WebConsts.COMPANY, user.getCompany());
 
+        List<UserPermission> userPermissionList = userPermissionService.findAllWithUserGroup(user.getUserGroup());
+
         List<String> permissionList = new ArrayList<>();
+        userPermissionList.stream().forEach(v -> {
+            permissionList.add(v.getModule().getModuleUrl());
+        });
+
         request.getSession(true).setAttribute(WebConsts.USER_PERMISSION, permissionList);
 
         return "redirect:" + loginForm.getReturnPath();

@@ -1,8 +1,8 @@
 package com.contract.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.contract.form.UserForm;
+import com.contract.model.User;
+import com.contract.service.repository.UserRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,9 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.contract.form.UserForm;
-import com.contract.model.User;
-import com.contract.service.repository.UserRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -34,8 +33,8 @@ public class UserService {
                         StringUtils.defaultString(userForm.getUsername(), StringUtils.EMPTY),
                         StringUtils.defaultString(userForm.getEmail(), StringUtils.EMPTY),
                         StringUtils.defaultString(userForm.getPhone(), StringUtils.EMPTY),
-                        userForm.getCompany().getCompanyId() == null ? -1L : userForm.getCompany().getCompanyId(),
-                        userForm.getUserGroup().getUserGroupId() == null ? -1L : userForm.getUserGroup().getUserGroupId(),
+                        userForm.getCompany() == null ? -1L : userForm.getCompany().getCompanyId(),
+                        userForm.getUserGroup() == null ? -1L : userForm.getUserGroup().getUserGroupId(),
                         userForm.getStatus() == null ? -1L : userForm.getStatus(),
                         pageable);
         userForm.setTotalRecord(page.getTotalElements());

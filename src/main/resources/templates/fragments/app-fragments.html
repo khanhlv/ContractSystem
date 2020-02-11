@@ -15,5 +15,15 @@
         </div>
     </div>
 
+    <div class="alert alert-warning" th:fragment="alert-warning" th:if="${messsage != null}">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        <h4 class="text-info"><i class="fa fa-check-circle"></i> Thông báo </h4><span th:text="${messsage}"></span>
+        <span class="redirectPath" th:text="${redirectPath}" style="display: none"></span>
+        <script>
+            setInterval(function() {
+                window.location = contextPath + $('.redirectPath').text();
+            }, 2000)
+        </script>
+    </div>
 </body>
 </html>

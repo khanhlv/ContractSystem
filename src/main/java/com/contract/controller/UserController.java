@@ -1,9 +1,12 @@
 package com.contract.controller;
 
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.contract.annotation.AllowAnonymous;
+import com.contract.exception.NotFoundDBException;
+import com.contract.form.UserForm;
+import com.contract.model.User;
+import com.contract.service.CompanyService;
+import com.contract.service.UserGroupService;
+import com.contract.service.UserService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.contract.annotation.AllowAnonymous;
-import com.contract.consts.WebConsts;
-import com.contract.exception.NotFoundDBException;
-import com.contract.form.UserForm;
-import com.contract.model.User;
-import com.contract.service.CompanyService;
-import com.contract.service.UserGroupService;
-import com.contract.service.UserService;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -139,11 +136,7 @@ public class UserController extends AbstractController {
     @AllowAnonymous
     public String logout(Model model, HttpServletRequest request) {
 
-        request.getSession(false).removeAttribute(WebConsts.USER_ID);
-        request.getSession(false).removeAttribute(WebConsts.COMPANY);
-        request.getSession(false).removeAttribute(WebConsts.USER_PERMISSION);
-        request.getSession(false).removeAttribute(WebConsts.EMAIL);
-        request.getSession(false).removeAttribute(WebConsts.FULL_NAME);
+        request.getSession().invalidate();
 
         return "redirect:/login";
     }
