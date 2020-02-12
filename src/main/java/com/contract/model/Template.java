@@ -1,7 +1,5 @@
 package com.contract.model;
 
-import java.util.List;
-
 import javax.persistence.*;
 
 @Entity
@@ -18,8 +16,13 @@ public class Template extends BaseModel {
     @Column(name = "TEMPLATE_DESCRIPTION")
     private String templateDescription;
 
-    @OneToMany(mappedBy="template", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<TemplateFile> templateFiles;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "CATEGORY_ID")
+    private Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "COMPANY_ID")
+    private Company company;
 
     public Long getTemplateId() {
         return templateId;
@@ -45,11 +48,19 @@ public class Template extends BaseModel {
         this.templateDescription = templateDescription;
     }
 
-    public List<TemplateFile> getTemplateFiles() {
-        return templateFiles;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setTemplateFiles(List<TemplateFile> templateFiles) {
-        this.templateFiles = templateFiles;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

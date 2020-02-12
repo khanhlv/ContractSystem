@@ -20,7 +20,7 @@ public class TemplateFile {
     private String templateFileName;
 
     @Column(name = "TEMPLATE_FILE_PATH")
-    private Long templateFilePath;
+    private String templateFilePath;
 
     @Column(name = "CREATED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
@@ -53,11 +53,11 @@ public class TemplateFile {
         this.templateFileName = templateFileName;
     }
 
-    public Long getTemplateFilePath() {
+    public String getTemplateFilePath() {
         return templateFilePath;
     }
 
-    public void setTemplateFilePath(Long templateFilePath) {
+    public void setTemplateFilePath(String templateFilePath) {
         this.templateFilePath = templateFilePath;
     }
 
