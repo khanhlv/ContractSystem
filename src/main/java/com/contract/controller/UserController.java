@@ -1,12 +1,9 @@
 package com.contract.controller;
 
-import com.contract.annotation.AllowAnonymous;
-import com.contract.exception.NotFoundDBException;
-import com.contract.form.UserForm;
-import com.contract.model.User;
-import com.contract.service.CompanyService;
-import com.contract.service.UserGroupService;
-import com.contract.service.UserService;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
+import com.contract.annotation.AllowAnonymous;
+import com.contract.exception.NotFoundDBException;
+import com.contract.form.UserForm;
+import com.contract.model.User;
+import com.contract.service.CompanyService;
+import com.contract.service.UserGroupService;
+import com.contract.service.UserService;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -69,7 +71,7 @@ public class UserController extends AbstractController {
                 throw new NotFoundDBException("Mã tài khoản không tồn tại.");
             }
 
-            BeanUtils.copyProperties(userForm, user, "createdDate", "createdUserId");
+            BeanUtils.copyProperties(userForm, user, "createdDate", "createdUserId", "username", "password");
 
             user.setUpdatedDate(new Date());
             user.setUpdatedUserId(getUserId(request));

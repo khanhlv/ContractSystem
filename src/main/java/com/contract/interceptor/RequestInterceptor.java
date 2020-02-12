@@ -59,12 +59,14 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
 
-        List permissionList = (ArrayList<String>) session.getAttribute(WebConsts.USER_PERMISSION);
+        List<String> permissionList = (ArrayList<String>) session.getAttribute(WebConsts.USER_PERMISSION);
 
-        if (permissionList != null
-                && permissionList.size() > 0
-                && !permissionList.contains(returnPath)) {
-            throw new AccessDeniedException("Access Denied");
+        if (permissionList != null && permissionList.size() > 0) {
+            String pattern = String.join("|", permissionList);
+
+            if (!returnPath.matches(pattern)) {
+                throw new AccessDeniedException("Access Denied");
+            }
         }
 
         return true;
