@@ -20,11 +20,6 @@ public interface CompanyRepository extends CrudRepository<Company, Long> {
                     "AND (:companyPhone = '' OR COMPANY_PHONE = :companyPhone) " +
                     "AND (:companyEmail = '' OR COMPANY_EMAIL = :companyEmail) " +
                     "AND (:status = '-1' OR STATUS = :status)",
-            countQuery = "SELECT count(1) FROM [COMPANY] " +
-                    "WHERE (:companyName = '' OR COMPANY_NAME LIKE :companyName) " +
-                    "AND (:companyPhone = '' OR COMPANY_PHONE = :companyPhone) " +
-                    "AND (:companyEmail = '' OR COMPANY_EMAIL = :companyEmail) " +
-                    "AND (:status = '-1' OR STATUS = :status)",
             nativeQuery = true)
     Page<Company> findAllWithPagination(@Param("companyName") String companyName,
                                         @Param("companyPhone") String companyPhone,

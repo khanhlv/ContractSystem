@@ -19,9 +19,6 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
             value = "SELECT * FROM [CATEGORY] " +
                     "WHERE (:categoryName = '' OR CATEGORY_NAME LIKE :categoryName) " +
                     "AND (:status = '-1' OR STATUS = :status)",
-            countQuery = "SELECT count(1) FROM [CATEGORY] " +
-                    "WHERE (:categoryName = '' OR CATEGORY_NAME LIKE :categoryName) " +
-                    "AND (:status = '-1' OR STATUS = :status)",
             nativeQuery = true)
     Page<Category> findAllWithPagination(@Param("categoryName") String categoryName,
                                         @Param("status") Long status, Pageable pageable);

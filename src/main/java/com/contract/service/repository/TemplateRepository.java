@@ -17,9 +17,6 @@ public interface TemplateRepository extends CrudRepository<Template, Long> {
             value = "SELECT * FROM [TEMPLATE] " +
                     "WHERE (:templateName = '' OR TEMPLATE_NAME LIKE :templateName) " +
                     "AND (:status = '-1' OR STATUS = :status)",
-            countQuery = "SELECT count(1) FROM [TEMPLATE] " +
-                    "WHERE (:templateName = '' OR TEMPLATE_NAME LIKE :templateName) " +
-                    "AND (:status = '-1' OR STATUS = :status)",
             nativeQuery = true)
     Page<Template> findAllWithPagination(@Param("templateName") String templateName,
                                          @Param("status") Long status, Pageable pageable);
