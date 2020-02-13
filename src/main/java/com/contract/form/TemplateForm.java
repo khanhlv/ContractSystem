@@ -1,5 +1,7 @@
 package com.contract.form;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.contract.consts.WebConsts;
 import com.contract.model.Template;
 
@@ -9,6 +11,8 @@ public class TemplateForm extends Template {
     private Long limit = WebConsts.PAGE_SIZE;
 
     private Long totalRecord;
+
+    private MultipartFile[] files;
 
     public Long getPage() {
         return page;
@@ -32,5 +36,13 @@ public class TemplateForm extends Template {
 
     public void setTotalRecord(Long totalRecord) {
         this.totalRecord = totalRecord;
+    }
+
+    public MultipartFile[] getFiles() {
+        return files;
+    }
+
+    public void setFiles(MultipartFile[] files) {
+        this.files = files;
     }
 }
