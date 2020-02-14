@@ -12,9 +12,8 @@ public class TemplateFile {
     @Column(nullable = false, name = "TEMPLATE_FILE_ID")
     private Long templateFileId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TEMPLATE_ID")
-    private Template template;
+    @Column(name = "TEMPLATE_ID")
+    private Long templateId;
 
     @Column(name = "TEMPLATE_FILE_NAME")
     private String templateFileName;
@@ -29,12 +28,12 @@ public class TemplateFile {
     @Column(name = "CREATED_USER_ID")
     private Long createdUserId;
 
-    public Template getTemplate() {
-        return template;
+    public Long getTemplateId() {
+        return templateId;
     }
 
-    public void setTemplate(Template template) {
-        this.template = template;
+    public void setTemplateId(Long templateId) {
+        this.templateId = templateId;
     }
 
     public Long getTemplateFileId() {

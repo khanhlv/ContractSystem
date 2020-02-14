@@ -45,7 +45,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Danh mục</label>
-                                        <select class="form-control" th:field="*{category.categoryId}">
+                                        <select class="form-control" th:field="*{categoryId}">
                                             <option value="-1">Tất cả</option>
                                             <option th:each="category: ${categoryList}"
                                                     th:value="${category.getCategoryId()}"
@@ -57,7 +57,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Công ty</label>
-                                        <select class="form-control" th:field="*{company.companyId}" placeholder="Chọn công ty">
+                                        <select class="form-control" th:field="*{companyId}" placeholder="Chọn công ty">
                                             <option value="-1">Tất cả</option>
                                             <option th:each="company: ${companyList}"
                                                     th:value="${company.getCompanyId()}"
@@ -98,6 +98,7 @@
                                     <th>Tên mẫu</th>
                                     <th>Danh mục</th>
                                     <th>Công ty</th>
+                                    <th>File</th>
                                     <th>Ngày tạo</th>
                                     <th>Tình trạng</th>
                                     <th width="80px" class="text-center"></th>
@@ -107,8 +108,9 @@
                                     <tr th:each="template, row: ${templateList}">
                                         <td th:text="${row.count}"></td>
                                         <td th:text="${template.getTemplateName()}">khanhlv5</td>
-                                        <td th:text="${template.getCategory().categoryName}">khanhlv5</td>
-                                        <td th:text="${template.getCompany().getCompanyName()}">khanhlv5</td>
+                                        <td th:text="${template.getCategoryName()}">khanhlv5</td>
+                                        <td th:text="${template.getCompanyName()}">khanhlv5</td>
+                                        <td th:text="${template.getFileCount()}">1</td>
                                         <td th:text="${#dates.format(template.getCreatedDate(), 'dd/MM/yyyy')}">14/01/2020</td>
                                         <td th:text="${template.getStatus() == 1 ? 'Hoạt động' : 'Không hoạt động'}">Hoạt động</td>
                                         <td class="text-center">

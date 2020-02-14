@@ -16,13 +16,11 @@ public class Template extends BaseModel {
     @Column(name = "TEMPLATE_DESCRIPTION")
     private String templateDescription;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "CATEGORY_ID")
-    private Category category;
+    private Long categoryId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "COMPANY_ID")
-    private Company company;
+    @Column(name = "COMPANY_ID")
+    private Long companyId;
 
     public Long getTemplateId() {
         return templateId;
@@ -48,19 +46,19 @@ public class Template extends BaseModel {
         this.templateDescription = templateDescription;
     }
 
-    public Category getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public Company getCompany() {
-        return company;
+    public Long getCompanyId() {
+        return companyId;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 }

@@ -42,7 +42,7 @@ public class TemplateController extends AbstractController {
     @GetMapping({"/", "/list"})
     public String index(Model model, TemplateForm templateForm) {
         model.addAttribute("form", templateForm);
-        model.addAttribute("templateList", templateService.findAllWithPagination(templateForm));
+        model.addAttribute("templateList", templateService.selectPaging(templateForm));
         model.addAttribute("companyList", companyService.findByStatus(1L));
         model.addAttribute("categoryList", categoryService.findCategoryByStatus(1L));
         return "template/list";

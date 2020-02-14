@@ -45,7 +45,7 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Công ty</label>
-                                    <select class="form-control" th:field="*{company.companyId}" placeholder="Chọn công ty">
+                                    <select class="form-control" th:field="*{companyId}" placeholder="Chọn công ty">
                                         <option th:each="company: ${companyList}"
                                                 th:value="${company.getCompanyId()}"
                                                 th:text="${company.getCompanyName()}">VPBank</option>
@@ -54,7 +54,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label>Danh mục</label>
-                                    <select class="form-control" th:field="*{category.categoryId}">
+                                    <select class="form-control" th:field="*{categoryId}">
                                         <option th:each="category: ${categoryList}"
                                                 th:value="${category.getCategoryId()}"
                                                 th:text="${category.getCategoryName()}">VPBank</option>
