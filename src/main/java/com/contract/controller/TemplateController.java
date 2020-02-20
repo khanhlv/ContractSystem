@@ -4,10 +4,12 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.contract.exception.NotFoundDBException;
 import com.contract.form.TemplateForm;
 import com.contract.model.Template;
+import com.contract.model.TemplateFile;
 import com.contract.service.CategoryService;
 import com.contract.service.CompanyService;
+import com.contract.service.TemplateFileService;
 import com.contract.service.TemplateService;
 
 @Controller
@@ -34,6 +38,9 @@ public class TemplateController extends AbstractController {
     private TemplateService templateService;
 
     @Autowired
+    private TemplateFileService templateFileService;
+
+    @Autowired
     private CompanyService companyService;
 
     @Autowired
@@ -42,7 +49,7 @@ public class TemplateController extends AbstractController {
     @GetMapping({"/", "/list"})
     public String index(Model model, TemplateForm templateForm) {
         model.addAttribute("form", templateForm);
-        model.addAttribute("templateList", templateService.selectPaging(templateForm));
+        model.addAttribute("templateList", templateService.findAllWithPagination(templateForm));
         model.addAttribute("companyList", companyService.findByStatus(1L));
         model.addAttribute("categoryList", categoryService.findCategoryByStatus(1L));
         return "template/list";
@@ -53,15 +60,21 @@ public class TemplateController extends AbstractController {
         model.addAttribute("form", templateForm);
         model.addAttribute("companyList", companyService.findByStatus(1L));
         model.addAttribute("categoryList", categoryService.findCategoryByStatus(1L));
+        model.addAttribute("templateFileList", new ArrayList<TemplateFile>());
         return "template/form";
     }
 
-    @PostMapping("/doSave")
-    public String doSave(Model model, HttpServletRequest request, TemplateForm templateForm) {
-
+    private List<File> uploadFile(Long templateId, TemplateForm templateForm) {
         // Thư mục gốc upload file.
-        String uploadRootPath = "D:/ContractSystem/data/";
-        System.out.println("uploadRootPath=" + uploadRootPath);
+        String uploadRootPath = "D:/ContractSystem/data/template/" + templateId + "/";
+
+        File file = new File(uploadRootPath);
+
+        try {
+            FileUtils.forceMkdir(file);
+        }catch (Exception ex) {
+
+        }
 
         MultipartFile[] fileDatas = templateForm.getFiles();
 
@@ -73,7 +86,6 @@ public class TemplateController extends AbstractController {
 
             // Tên file gốc tại Client.
             String name = fileData.getOriginalFilename();
-            System.out.println("Client File Name = " + name);
 
             if (name != null && name.length() > 0) {
                 try {
@@ -85,42 +97,57 @@ public class TemplateController extends AbstractController {
                     stream.close();
 
                     uploadedFiles.add(serverFile);
-                    System.out.println("Write file: " + serverFile);
                 } catch (Exception e) {
-                    System.out.println("Error Write file: " + name);
                     failedFiles.add(name);
                 }
             }
         }
-//        if (categoryForm.getCategoryId() != null) {
-//            Category category = templateService.get()
-//                    .findById(categoryForm.getCategoryId()).orElse(null);
-//
-//            if (category == null) {
-//                throw new NotFoundDBException("Mã danh mục không tồn tại.");
-//            }
-//
-//            BeanUtils.copyProperties(categoryForm, category, "createdDate", "createdUserId");
-//
-//            category.setUpdatedDate(new Date());
-//            category.setUpdatedUserId(getUserId(request));
-//
-//            categoryService.getCategoryRepository().save(category);
-//
-//            model.addAttribute("messsage", "Chỉnh sửa danh mục thành công. Xin vui lòng đợi để chuyển hướng.");
-//            model.addAttribute("redirectPath", "/category/list");
-//        } else {
-//            Category category = new Category();
-//            BeanUtils.copyProperties(categoryForm, category);
-//
-//            category.setCreatedDate(new Date());
-//            category.setCreatedUserId(getUserId(request));
-//
-//            categoryService.getCategoryRepository().save(category);
-//
-//            model.addAttribute("messsage", "Thêm mới danh mục thành công. Xin vui lòng đợi để chuyển hướng.");
-//            model.addAttribute("redirectPath", "/category/list");
-//        }
+
+        return uploadedFiles;
+    }
+    @PostMapping("/doSave")
+    public String doSave(Model model, HttpServletRequest request, TemplateForm templateForm) {
+        if (templateForm.getTemplateId() != null) {
+            Template template = templateService.getTemplateRepository()
+                    .findById(templateForm.getTemplateId()).orElse(null);
+
+            if (template == null) {
+                throw new NotFoundDBException("Mã mẫu hợp đồng không tồn tại.");
+            }
+
+            BeanUtils.copyProperties(templateForm, template, "createdDate", "createdUserId");
+
+            template.setUpdatedDate(new Date());
+            template.setUpdatedUserId(getUserId(request));
+
+            templateService.getTemplateRepository().save(template);
+
+            model.addAttribute("messsage", "Chỉnh sửa mẫu hợp đồng thành công. Xin vui lòng đợi để chuyển hướng.");
+            model.addAttribute("redirectPath", "/template/list");
+        } else {
+            Template template = new Template();
+            BeanUtils.copyProperties(templateForm, template);
+
+            template.setCreatedDate(new Date());
+            template.setCreatedUserId(getUserId(request));
+
+            templateService.getTemplateRepository().save(template);
+
+            List<File> fileList = uploadFile(template.getTemplateId(), templateForm);
+
+            fileList.forEach(f -> {
+                TemplateFile templateFile = new TemplateFile();
+                templateFile.setCreatedDate(new Date());
+                templateFile.setCreatedUserId(getUserId(request));
+                templateFile.setTemplateFileName(f.getName());
+                templateFile.setTemplateFilePath(f.getAbsolutePath());
+                templateFile.setTemplateId(template.getTemplateId());
+                templateFileService.getTemplateFileRepository().save(templateFile);
+            });
+
+            model.addAttribute("messsage", "Thêm mới mẫu hợp đồng thành công. Xin vui lòng đợi để chuyển hướng.");
+            model.addAttribute("redirectPath", "/template/list");
+        }
 
         model.addAttribute("form", templateForm);
 
@@ -140,9 +167,31 @@ public class TemplateController extends AbstractController {
         }
 
         BeanUtils.copyProperties(template, templateForm);
+        model.addAttribute("companyList", companyService.findByStatus(1L));
+        model.addAttribute("categoryList", categoryService.findCategoryByStatus(1L));
         model.addAttribute("form", templateForm);
 
+        model.addAttribute("templateFileList", templateFileService.findByTemplateId(Long.valueOf(id)));
+
         return "template/form";
+    }
+
+    @GetMapping("/deleteFile/{id}")
+    public String deleteFile(Model model,
+                             @PathVariable(name = "id") String id) {
+        TemplateFile templateFile = templateFileService.getTemplateFileRepository()
+                .findById(NumberUtils.toLong(id)).orElse(null);
+
+        if (templateFile == null) {
+            throw new NotFoundDBException("File mẫu hợp đồng không tồn tại.");
+        }
+
+        // Delete template
+        templateFileService.getTemplateFileRepository().deleteById(templateFile.getTemplateFileId());
+
+        FileUtils.deleteQuietly(new File(templateFile.getTemplateFilePath()));
+
+        return "redirect:/template/edit/" + templateFile.getTemplateId();
     }
 
     @GetMapping("/delete/{id}")
@@ -154,7 +203,12 @@ public class TemplateController extends AbstractController {
             throw new NotFoundDBException("Mã mẫu hợp đồng không tồn tại.");
         }
 
+        // Delete template
         templateService.getTemplateRepository().deleteById(template.getTemplateId());
+
+        // Delete template file
+
+        // Delete file
 
         return "redirect:/template/list";
     }

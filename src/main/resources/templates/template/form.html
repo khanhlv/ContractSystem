@@ -35,6 +35,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Thông tin mẫu hợp đồng</h4>
+                        <div class="alert alert-warning" th:replace="~{fragments/app-fragments :: alert-warning}"></div>
                         <form enctype="multipart/form-data" method="POST" th:action="@{/template/doSave}" th:object="${form}">
                             <input type="hidden" class="form-control" th:field="*{templateId}">
                             <div class="form-group">
@@ -68,7 +69,7 @@
                             </div>
 
                             <div class="form-group custom-file">
-                                <input type="file" th:field="*{files}" multiple class="custom-file-input" id="customFile">
+                                <input type="file" th:field="*{files}" accept=".doc, .docx" multiple class="custom-file-input" id="customFile">
                                 <label class="custom-file-label form-control" for="customFile">Chọn File mẫu</label>
                             </div>
 
@@ -80,15 +81,18 @@
                                                 <th width="10px">STT</th>
                                                 <th>Tên File mẫu</th>
                                                 <th width="120px">Ngày tạo</th>
-                                                <th width="120px" class="text-center">Hành động</th>
+                                                <th width="80px" class="text-center"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Hợp đồng 2019.docx</td>
-                                                <td>14/01/2020</td>
-                                                <td class="text-center"><a href="/template/delete/1">Xóa</a></td>
+                                            <tr th:each="templateFile, row: ${templateFileList}">
+                                                <td th:text="${row.count}"></td>
+                                                <td th:text="${templateFile.getTemplateFileName()}">khanhlv5</td>
+                                                <td th:text="${#dates.format(templateFile.getCreatedDate(), 'dd/MM/yyyy')}">14/01/2020</td>
+                                                <td class="text-center">
+                                                    <a data-toggle="tooltip" title="Xóa" onclick="return confirm('Bạn có thật sự muốn xóa bản ghi?');"
+                                                       th:href="${'/template/deleteFile/' + templateFile.getTemplateFileId()}"><i class="fas fa-trash"></i></a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

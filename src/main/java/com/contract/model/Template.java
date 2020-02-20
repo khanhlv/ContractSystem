@@ -16,7 +16,7 @@ public class Template extends BaseModel {
     @Column(name = "TEMPLATE_DESCRIPTION")
     private String templateDescription;
 
-    @JoinColumn(name = "CATEGORY_ID")
+    @Column(name = "CATEGORY_ID")
     private Long categoryId;
 
     @Column(name = "COMPANY_ID")
